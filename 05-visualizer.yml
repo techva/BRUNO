@@ -1,0 +1,40 @@
+info:
+  name: 05-visualizer
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: https://echo.usebruno.com
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const rowData = [
+          { id: 1, name: "John", role: "Developer" },
+          { id: 2, name: "Smith", role: "Designer" },
+          { id: 3, name: "Harry", role: "Product Manager" }
+        ];
+
+        const columnDefinitions = [
+          { field: "id", filter: true, floatingFilter: true },
+          { field: "name", filter: true, floatingFilter: true },
+          { field: "role", filter: true, floatingFilter: true }
+        ];
+
+        bru.visualize('table', {
+          name: 'tableEmp',
+          provider: 'ag-grid',
+          props: {
+            rowData,
+            columnDefinitions
+          }
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
