@@ -21,7 +21,7 @@ pipeline {
                     sh 'npm -v'
                     echo 'Installing Bruno CLI globally...'
                     sh 'npm install -g @usebruno/cli'
-                    sh 'bru --version'
+                    sh 'npx 'bru --version'
                 }
             }
         }
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 withEnv(["PATH+NODE=${NODE_HOME}/bin"]) { // Still need this or declare it inside script block
                     echo 'Executing Bruno API tests...'
-                    sh 'bru run --env ci --reporter-html results.html'
+                    sh 'npx 'bru run --env ci --reporter-html results.html'
                 }
             }
         }
